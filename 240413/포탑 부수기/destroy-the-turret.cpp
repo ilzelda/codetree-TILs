@@ -24,7 +24,7 @@ int real_i(int i) {
 }
 
 int real_j(int j) {
-	if (j >= N) j -= M;
+	if (j >= M) j -= M;
 	else if (j < 0) j += M;
 
 	return j;
