@@ -136,8 +136,8 @@ def find_exit(_village):
                     return (i, j), (0, M-1, M-1-(i-min_i))
 
 def find_start(_cuboid):
-    for i in range(N):
-        for j in range(N):
+    for i in range(M):
+        for j in range(M):
 
             if _cuboid[4][i][j] == 2:
                 return (4,i,j)
