@@ -180,7 +180,7 @@ def update_village(time_ground):
         cur_i, cur_j = r, c
         village[cur_i][cur_j] = 1
 
-        for t in range(time_ground):
+        for t in range(time_ground+1):
             if t != 0 and t % v == 0:
                 next_i = cur_i + di[d]
                 next_j = cur_j + dj[d]
@@ -188,6 +188,8 @@ def update_village(time_ground):
                 if village[next_i][next_j] != 0 : break
 
                 village[next_i][next_j] = 1
+                cur_i = next_i
+                cur_j = next_j
 
 def find_goal():
     for i in range(N):
