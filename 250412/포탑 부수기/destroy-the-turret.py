@@ -41,6 +41,7 @@ def findLeastSTR():
             if is_first :
                 rtn_turret = (i,j)
                 is_first = False
+                continue
 
             rtn_turret = compareMin(rtn_turret, (i,j))
 
@@ -76,16 +77,18 @@ def compareMax(t1, t2):
                     return t1
 
 
-def findMaxSTR():
+def findMaxSTR(atk):
     is_first = True
     rtn_turret = (0, 0)
 
     for i in range(N):
         for j in range(M):
             if Turrets[i][j] == 0 : continue
+            if (i,j) == atk : continue
             if is_first :
                 rtn_turret = (i,j)
                 is_first = False
+                continue
 
             rtn_turret = compareMax(rtn_turret, (i, j))
 
@@ -162,7 +165,7 @@ def bombAttack(atk, tgt):
             if next_i > N-1 : next_i = 0
             if next_j < 0 : next_j = M-1
             if next_j > M-1 : next_j = 0
-            
+
         if Turrets[next_i][next_j] == 0 : continue
 
         _turret_info.append((next_i, next_j))
@@ -212,7 +215,7 @@ for k in range(1, K+1):
     Logs[attacker[0]][attacker[1]] = k
 
     # 2
-    target = findMaxSTR()
+    target = findMaxSTR(attacker)
     if DEBUG : print("target : ", target)
 
     flag, turret_info = laserAttack(attacker, target)
@@ -232,5 +235,5 @@ for k in range(1, K+1):
     ready(turret_info)
     if DEBUG : debugTurrets("ready")
 
-ans_turret = findMaxSTR()
+ans_turret = findMaxSTR((-1,-1))
 print(Turrets[ans_turret[0]][ans_turret[1]])
