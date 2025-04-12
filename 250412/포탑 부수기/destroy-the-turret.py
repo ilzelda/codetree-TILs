@@ -149,21 +149,20 @@ def laserAttack(atk, tgt):
         return False, laser_turrets
 
 def bombAttack(atk, tgt):
+    bomb_di = [-1, -1, -1, +0, +1, +1, +1, +0]
+    bomb_dj = [-1, +0, +1, +1, +1, +0, -1, -1]
+
     _turret_info = []
-    for d in range(4):
-        next_i = tgt[0] + di[d]
-        next_j = tgt[1] + dj[d]
+    for d in range(8):
+        next_i = tgt[0] + bomb_di[d]
+        next_j = tgt[1] + bomb_dj[d]
 
         if not in_range(next_i, next_j):
-            if d == 0:
-                next_j = 0
-            elif d == 1:
-                next_i = 0
-            elif d == 2:
-                next_j = M - 1
-            elif d == 3:
-                next_i = N - 1
-
+            if next_i < 0 : next_i = N-1
+            if next_i > N-1 : next_i = 0
+            if next_j < 0 : next_j = M-1
+            if next_j > M-1 : next_j = 0
+            
         if Turrets[next_i][next_j] == 0 : continue
 
         _turret_info.append((next_i, next_j))
