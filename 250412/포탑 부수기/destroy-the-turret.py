@@ -68,7 +68,7 @@ def compareMax(t1, t2):
         else:
             if i1 + j1 > i2 + j2:
                 return t2
-            elif i1 + j1 > i2 + j2:
+            elif i1 + j1 < i2 + j2:
                 return t1
             else:
                 if j1 > j2:
@@ -102,8 +102,9 @@ def in_range(i,j):
 
 min_dist = 1<<30
 laser_turrets = []
+visited = [ [False for _ in range(M)] for _ in range(N)]
 def DFS(cur_i, cur_j, cur_dist, turrets, tgt):
-    global min_dist, laser_turrets
+    global min_dist, laser_turrets, visited
 
     if cur_i == tgt[0] and cur_j == tgt[1]:
         if min_dist > cur_dist:
@@ -128,19 +129,99 @@ def DFS(cur_i, cur_j, cur_dist, turrets, tgt):
 
         if (next_i, next_j) in turrets : continue
         if Turrets[next_i][next_j] == 0 : continue
+        if visited[next_i][next_j] : continue
 
         turrets.append( (next_i, next_j) )
+        visited[next_i][next_j] = True
+
         DFS(next_i, next_j, cur_dist+1, turrets, tgt)
+
+        visited[next_i][next_j] = False
         turrets.pop(-1)
 
-# DFS
+def BFS(atk, tgt):
+    global visited
+
+    visited = [[False for _ in range(M)] for _ in range(N)]
+
+    # (dist, dir)
+    memo = [[ [1<<30, -1] for _ in range(M)] for _ in range(N)]
+    memo[atk[0]][atk[1]][0] = 0
+
+    q = deque()
+    q.append(atk)
+    visited[atk[0]][atk[1]] = True
+
+    while len(q)>0:
+        cur_i, cur_j = q.popleft()
+        cur_dist, _ = memo[cur_i][cur_j]
+        for d in range(4):
+            next_i = cur_i + di[d]
+            next_j = cur_j + dj[d]
+
+            if not in_range(next_i, next_j):
+                if d == 0:
+                    next_j = 0
+                elif d == 1:
+                    next_i = 0
+                elif d == 2:
+                    next_j = M - 1
+                elif d == 3:
+                    next_i = N - 1
+
+
+            if Turrets[next_i][next_j] == 0: continue
+            if visited[next_i][next_j]: continue
+
+            if memo[next_i][next_j][0] > cur_dist+1:
+                memo[next_i][next_j] = (cur_dist+1, d)
+
+            if (next_i, next_j) == tgt :
+                return memo
+
+            visited[next_i][next_j] = True
+            q.append((next_i, next_j))
+
+def make_list(atk, tgt, _memo):
+    _list = []
+    cur_i = tgt[0]
+    cur_j = tgt[1]
+
+    while( (cur_i, cur_j) != atk):
+        _list.append( (cur_i, cur_j) )
+
+        _, d = _memo[cur_i][cur_j]
+        d = (d + 2) % 4
+        cur_i = cur_i + di[d]
+        cur_j = cur_j + dj[d]
+
+        if cur_i < 0:
+            cur_i = N-1
+        if cur_j < 0:
+            cur_j = M-1
+        if cur_i > N-1:
+            cur_i = 0
+        if cur_j > M-1:
+            cur_j = 0
+
+    _list.append( (cur_i, cur_j) )
+
+    return _list
+
+
 def laserAttack(atk, tgt):
-    global min_dist, laser_turrets
+    global min_dist, laser_turrets, visited
 
     min_dist = 1 << 30
     laser_turrets = []
+    visited = [[False for _ in range(M)] for _ in range(N)]
 
-    DFS(atk[0], atk[1], 0, [atk], tgt)
+    # visited[atk[0]][atk[1]] = True
+    # DFS(atk[0], atk[1], 0, [atk], tgt)
+
+    memo = BFS(atk, tgt)
+    if memo is not None:
+        laser_turrets = make_list(atk, tgt, memo)
 
     if DEBUG : print("laser_turrets : ", laser_turrets)
 
@@ -202,7 +283,7 @@ def debugTurrets(msg):
     print(msg, " : ")
     for row in Turrets:
         for n in row:
-            print(f"{n:2d}", end=" ")
+            print(f"{n:4d}", end=" ")
         print()
 
 ## main
