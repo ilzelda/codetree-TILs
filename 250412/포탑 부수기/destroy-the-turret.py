@@ -174,7 +174,7 @@ def BFS(atk, tgt):
             if visited[next_i][next_j]: continue
 
             if memo[next_i][next_j][0] > cur_dist+1:
-                memo[next_i][next_j] = (cur_dist+1, d)
+                memo[next_i][next_j] = [cur_dist+1, d]
 
             if (next_i, next_j) == tgt :
                 return memo
@@ -248,6 +248,7 @@ def bombAttack(atk, tgt):
             if next_j > M-1 : next_j = 0
 
         if Turrets[next_i][next_j] == 0 : continue
+        if (next_i, next_j) == atk : continue
 
         _turret_info.append((next_i, next_j))
 
