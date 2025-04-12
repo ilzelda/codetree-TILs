@@ -185,18 +185,25 @@ def attacked(atk, tgt, _turret_info ):
 def ready(_turret_info):
     global Turrets
 
+    alive = 0
+
     for i in range(N):
         for j in range(M):
             Turrets[i][j] = max(Turrets[i][j], 0)
 
             if Turrets[i][j] == 0 : continue
+            alive += 1
             if (i,j) in _turret_info : continue
             else : Turrets[i][j]+=1
+
+    return alive
 
 def debugTurrets(msg):
     print(msg, " : ")
     for row in Turrets:
-        print(*row)
+        for n in row:
+            print(f"{n:2d}", end=" ")
+        print()
 
 ## main
 # DEBUG = True
@@ -232,8 +239,9 @@ for k in range(1, K+1):
     turret_info.append(attacker)
     turret_info.append(target)
 
-    ready(turret_info)
+    alive = ready(turret_info)
     if DEBUG : debugTurrets("ready")
+    if alive == 1 : break
 
 ans_turret = findMaxSTR((-1,-1))
 print(Turrets[ans_turret[0]][ans_turret[1]])
