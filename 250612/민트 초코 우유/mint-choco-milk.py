@@ -67,8 +67,8 @@ def makeGroup():
                     if cur_val != People[next_i][next_j].p : continue
 
                     visited[next_i][next_j] = True
-                    q.append((next_i, next_j))
                     _group.append((next_i, next_j))
+                    q.append((next_i, next_j))
 
             groups.append(_group)
 
@@ -156,22 +156,24 @@ def spread(_chief_list):
         next_i = i + di[dir]
         next_j = j + dj[dir]
 
-        while(in_range(next_i, next_j) and x > 0 ):
+        while(in_range(next_i, next_j)):
             if People[i][j].p != People[next_i][next_j].p :
+                blocked.append((next_i, next_j))
                 y = People[next_i][next_j].b
                 if x > y : # 강한전파
                     People[next_i][next_j].p = People[i][j].p
                     x -= (y+1)
-                    if x <= 0 : x = 0
                     People[next_i][next_j].b += 1
+                    if x <= 0 : break
+
                 else : # 약한전파
                     for p_idx in range(3):
-                        if People[next_i][next_j].p[p_idx] == 0 and People[i][j].p[p_idx] == 1:
+                        if People[i][j].p[p_idx] == 1:
                             People[next_i][next_j].p[p_idx] = 1
                     People[next_i][next_j].b += x
                     x = 0
+                    break
 
-                blocked.append((next_i, next_j))
 
             next_i += di[dir]
             next_j += dj[dir]
