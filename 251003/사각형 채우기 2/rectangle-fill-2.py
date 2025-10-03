@@ -9,7 +9,7 @@ mem[2] = 3
 def recur(n):
     if n==1: return 1
     if n==2 : return 3
-    
+
     a = recur(n-1) if mem[n-1] == -1 else mem[n-1]
     b = recur(n-2) if mem[n-2] == -1 else mem[n-2]
 
@@ -19,4 +19,4 @@ def recur(n):
 
     return a + 2 * b
 
-print(recur(N))
+print(recur(N) % 10007)
