@@ -52,11 +52,12 @@ for i in range(1,N):
 for j in range(1,N):
     dp[0][j] = dp[0][j-1] + arr[0][j]
 
-for i in range(N):
-    print(dp[i])
 
 for i in range(1,N):
     for j in range(1,N):
-        dp[i][j] = max(arr[i][j] + dp[i-1][j-1], arr[i][j]+dp[i][j-1])
+        dp[i][j] = max(arr[i][j] + dp[i-1][j], arr[i][j]+dp[i][j-1])
+
+# for i in range(N):
+#     print(dp[i])
 
 print(dp[N-1][N-1])
