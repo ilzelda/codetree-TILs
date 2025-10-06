@@ -9,7 +9,7 @@ for i in range(1,N):
     dp[i][0] = max(grid[i][0], dp[i-1][0])
 
 for j in range(1,N):
-    dp[0][j] = max(grid[0][j], dp[j-1][0])
+    dp[0][j] = max(grid[0][j], dp[0][j-1])
 
 for i in range(1,N):
     for j in range(1,N):
