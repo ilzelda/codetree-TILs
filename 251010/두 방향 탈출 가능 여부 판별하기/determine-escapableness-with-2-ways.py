@@ -14,8 +14,8 @@ def go(i,j):
     global ans
 
     if i == N-1 and j==M-1 :
-        ans = 1
-        return
+        print(1)
+        exit(0)
 
     for d in range(2):
         ni, nj = i+di[d], j+dj[d]
@@ -23,7 +23,7 @@ def go(i,j):
         if not in_range(ni,nj): continue
         if grid[ni][nj] == 0 : continue
 
-        
+
         go(ni,nj)
 
 
