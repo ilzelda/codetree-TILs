@@ -1,0 +1,31 @@
+N, M = map(int, input().split())
+grid = [tuple(map(int, input().split())) for _ in range(N)]
+
+# Please write your code here.
+ans = 0
+
+di = [0, 1]
+dj = [1, 0]
+
+def in_range(i,j):
+    return 0<=i<N and 0<=j<M
+
+def go(i,j):
+    global ans
+
+    if i == N-1 and j==M-1 :
+        ans = 1
+        return
+
+    for d in range(2):
+        ni, nj = i+di[d], j+dj[d]
+        
+        if not in_range(ni,nj): continue
+        if grid[ni][nj] == 0 : continue
+
+        
+        go(ni,nj)
+
+
+go(0,0)
+print(ans)
