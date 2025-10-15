@@ -16,7 +16,7 @@ for i in range(N):
 # for row in dp:
 #     print(row)
 
-ans = 0
+ans = 1
 for row in dp:
     ans = max( ans, max(row) )
 print(ans)
