@@ -2,7 +2,8 @@ N, M = map(int, input().split())
 grid = [list(map(int, input().split())) for _ in range(N)]
 
 # Please write your code here.
-dp = [ [1] * M for _ in range(N)] # i,j 까지 왔을 때 최대 점프 횟수를 저장
+dp = [ [0] * M for _ in range(N)] # i,j 까지 왔을 때 최대 점프 횟수를 저장
+dp[0][0] = 1
 
 for i in range(N):
     for j in range(M):
@@ -16,7 +17,7 @@ for i in range(N):
 # for row in dp:
 #     print(row)
 
-ans = 1
+ans = -1
 for row in dp:
     ans = max( ans, max(row) )
 print(ans)
