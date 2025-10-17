@@ -59,9 +59,9 @@ for pivot in range(N-1):
     base = inc_dp[pivot]
 
     # pivot 다음부터 최장감소 찾기
-    dp[pivot]=find(sequence[pivot+1:])
+    dp[pivot]=find(sequence[pivot:])
     # print(f"{sequence[pivot+1:]} : {dp[i]} + {base}")
-    dp[pivot] += base
+    dp[pivot] += base - 1
 
 dp[N-1] = inc_dp[N-1]
 ans3 = max(dp)
@@ -69,6 +69,11 @@ ans3 = max(dp)
 # print("inc : ", inc_dp)
 # print("dec : ", dec_dp)
 # print("dp : ", dp)
+
+# print(ans1)
+# print(ans2)
+# print(ans3)
+
 
 print(max(ans1, ans2, ans3))
 
