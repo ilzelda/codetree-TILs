@@ -2,9 +2,9 @@ N, M = map(int, input().split())
 coin = list(map(int, input().split()))
 
 dp = [-1 for _ in range(10001)] # i원을 거슬러줄 때 최소 동전 개수
-# dp[0] = 0
-# for c in coin:
-#     dp[c] = 1
+dp[0] = 0
+for c in coin:
+    dp[c] = 1
 
 def recur(money): #  i원을 거슬러줄 때 최소 동전 개수
     if money == 0: # base
