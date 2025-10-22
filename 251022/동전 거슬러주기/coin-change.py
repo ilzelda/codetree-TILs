@@ -47,7 +47,7 @@
 N, M = map(int, input().split())
 coin = list(map(int, input().split()))
 
-dp = [1<<30 for _ in range(M+1)] # i원을 만들 수 있는 최소 동전개수
+dp = [-1 for _ in range(M+1)] # i원을 만들 수 있는 최소 동전개수
 
 dp[0] = 0
 for c in coin:
@@ -56,7 +56,7 @@ for c in coin:
 def recur(_coin):
     if _coin < 0:
         return 1<<30
-    if dp[_coin] != 1<<30:
+    if dp[_coin] != -1:
         return dp[_coin]
 
     res = 1<<30
