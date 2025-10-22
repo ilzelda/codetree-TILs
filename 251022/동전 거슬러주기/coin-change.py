@@ -83,4 +83,4 @@ for i in range(1, M+1):
         money = i + c
         dp[money] = min(dp[money], dp[i]+1)
 
-print(dp[M])
+print(dp[M] if dp[M] != 1<<30 else -1)
