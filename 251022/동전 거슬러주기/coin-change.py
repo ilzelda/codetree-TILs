@@ -1,30 +1,31 @@
+N, M = map(int, input().split())
+coin = list(map(int, input().split()))
 
+dp = [-1 for _ in range(10001)] # i원을 거슬러줄 때 최소 동전 개수
+# dp[0] = 0
+# for c in coin:
+#     dp[c] = 1
 
-# dp = [-1 for _ in range(10001)] # i원을 거슬러줄 때 최소 동전 개수
-# # dp[0] = 0
-# # for c in coin:
-# #     dp[c] = 1
+def recur(money): #  i원을 거슬러줄 때 최소 동전 개수
+    if money == 0: # base
+        return 0
+    elif money < 0 : 
+        return 1<<30
 
-# def recur(money): #  i원을 거슬러줄 때 최소 동전 개수
-#     if money == 0: # base
-#         return 0
-#     elif money < 0 : 
-#         return 1<<30
+    if dp[money] != -1 : 
+        return dp[money]
 
-#     if dp[money] != -1 : 
-#         return dp[money]
-
-#     res = 1<<30
+    res = 1<<30
     
-#     for i in range(N):
-#         num = recur(money - coin[i]) + 1
-#         res=min(res,num)
+    for i in range(N):
+        num = recur(money - coin[i]) + 1
+        res=min(res,num)
 
-#     dp[money] = res
+    dp[money] = res
     
-#     return dp[money]
+    return dp[money]
 
-# print(recur(M))
+print(recur(M))
 
 # dp = [1<<30 for _ in range(10001)] # i원을 거슬러줄 때 최소 동전 개수
 # dp[0] = 0
@@ -44,30 +45,28 @@
 # else :
 #     print(-1)
 
-N, M = map(int, input().split())
-coin = list(map(int, input().split()))
 
-dp = [-1 for _ in range(M+1)] # i원을 만들 수 있는 최소 동전개수
 
-dp[0] = 0
-for c in coin:
-    dp[c] = 1
+# dp = [-1 for _ in range(M+1)] # i원을 만들 수 있는 최소 동전개수
 
-def recur(_coin):
-    if _coin < 0:
-        return 1<<30
-    if dp[_coin] != -1:
-        return dp[_coin]
+# dp[0] = 0
+# for c in coin:
+#     dp[c] = 1
 
-    res = 1<<30
-    for c in coin:
-        res = min(res, recur(_coin-c) + 1)
+# def recur(_coin):
+#     if _coin < 0:
+#         return 1<<30
+#     if dp[_coin] != -1:
+#         return dp[_coin]
 
-    dp[_coin] = res
+#     res = 1<<30
+#     for c in coin:
+#         res = min(res, recur(_coin-c) + 1)
+
+#     dp[_coin] = res
     
-    return dp[_coin]
+#     return dp[_coin]
 
 
-ans = recur(M) 
-ans = -1 if ans == 1<<30 else ans
-print(ans)
+# ans = recur(M) 
+# print(ans)
