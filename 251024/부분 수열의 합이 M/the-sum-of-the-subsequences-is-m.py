@@ -60,6 +60,7 @@ def recur(cur_total, cur_len, start_i):
     if cur_total == M:
         ans = min(ans, cur_len)
         return
+    elif cur_total > M : return
 
     for i in range(start_i+1, N):
         recur(cur_total+arr[i], cur_len+1, i)
