@@ -1,8 +1,9 @@
 N, M = map(int, input().split())
 coins = list(map(int, input().split()))
 
+INT_MIN = (1<<30) * -1
 # Please write your code here.
-dp = [-1 for _ in range(M+1)] # i금액의 최대 동전개수
+dp = [INT_MIN for _ in range(M+1)] # i금액의 최대 동전개수
 
 dp[0] = 0
 
@@ -28,6 +29,9 @@ for i in range(M+1):
         if j < 0 : continue
 
         dp[i] = max(dp[i], dp[j]+1)
+
+ans = -1 if dp[M] == INT_MIN else dp[M]
+print(ans)
 
 # for i in range(M+1):
 #     print(f"{i:2d}", end= ' ')
