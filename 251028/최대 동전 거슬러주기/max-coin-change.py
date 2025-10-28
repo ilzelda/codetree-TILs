@@ -29,8 +29,7 @@ for i in range(M+1):
         if j < 0 : continue
 
         dp[i] = max(dp[i], dp[j]+1)
-
-ans = -1 if dp[M] == INT_MIN else dp[M]
+ans = -1 if dp[M] < 0 else dp[M]
 print(ans)
 
 # for i in range(M+1):
