@@ -27,9 +27,13 @@ for i in range(M+1):
     for c in coins:
         j = i-c
         if j < 0 : continue
+        if dp[j] == INT_MIN : continue
 
         dp[i] = max(dp[i], dp[j]+1)
-ans = -1 if dp[M] < 0 else dp[M]
+
+# ans = -1 if dp[M] < 0 else dp[M]
+ans = -1 if dp[M] == INT_MIN else dp[M]
+
 print(ans)
 
 # for i in range(M+1):
