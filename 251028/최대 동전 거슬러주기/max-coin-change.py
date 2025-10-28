@@ -2,7 +2,7 @@ N, M = map(int, input().split())
 coins = list(map(int, input().split()))
 
 # Please write your code here.
-dp = [-1 for _ in range(M+1)] # i금액의 최대 동전개수
+dp = [-1 for _ in range(10000+1)] # i금액의 최대 동전개수
 
 dp[0] = 0
 
