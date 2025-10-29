@@ -12,6 +12,8 @@ def recur(i, left, val):
             return
         if val == 0 : 
             res = True
+            print("Yes")
+            exit()
             return
         return
 
@@ -29,4 +31,4 @@ def recur(i, left, val):
 recur(0, [], M)
 
 ans = "Yes" if res else "No"
-print(ans)
+print("No")
