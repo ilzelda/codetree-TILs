@@ -20,6 +20,7 @@ def recur(i, left, val):
     recur(i+1, left, val-A[i])
 
     # 미포함
+    left.pop()
     recur(i+1, left, val)
 
 
