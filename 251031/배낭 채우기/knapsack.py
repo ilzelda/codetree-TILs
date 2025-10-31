@@ -15,4 +15,4 @@ for i in range(N):
             
             dp[j] = max(dp[j], dp[j-w[i]] + v[i])
             
-print(dp[M])
+print(max(dp))
