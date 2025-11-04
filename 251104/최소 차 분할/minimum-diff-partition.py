@@ -9,15 +9,17 @@ ans = INT_MAX
 
 dp = [False for _ in range(1000 * 100 + 1)] # i를 만들 수 있는지
 
+dp[0] = True
+
 for n in arr:
-    dp[n] = True
+    for i in range(1, len(dp))[::-1]:
+        if i-n < 0 : continue
 
-for i in range(0, len(dp)):
-    if dp[i]:
-        ans = min(ans, abs(total - (2*i)))
+        if dp[i-n] : dp[i] = True
 
-        for n in arr:
-            if i+n < len(dp) : dp[i+n] = True
+for n in range(1, len(dp)):
+    if dp[n] :
+        ans = min(ans, abs(total - (2*n)))
 
 print(ans)
 
