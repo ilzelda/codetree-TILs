@@ -11,8 +11,10 @@ for n in arr:
     for i in range(len(dp))[::-1]:
         if i-n >=0: dp[i] = True if dp[i-n] else False
 
-if dp[int(total/2)] : ans = "Yes" 
-else : ans = "No"
+if total % 2 != 0 : ans = "No"
+else:
+    if dp[int(total/2)] : ans = "Yes" 
+    else : ans = "No"
 
 print(ans)
 
