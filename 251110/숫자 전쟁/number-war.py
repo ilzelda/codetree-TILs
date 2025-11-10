@@ -12,15 +12,17 @@ for i in range(1, N+1):
         cur = second_cards[j] if first_cards[i] > second_cards[j] else 0
 
         # 둘다 버려서 오기
-        from_diag = dp[i-1][j-1]+cur 
+        from_diag = dp[i-1][j-1] 
 
         # first를 버려서 오기
-        from_up = dp[i-1][j] + cur if first_cards[i-1] > second_cards[j] else INT_MIN 
+        from_up = dp[i-1][j] if first_cards[i-1] < second_cards[j] else INT_MIN 
 
         # second를 버려서 오기
-        from_left = dp[i][j-1] + cur if first_cards[i] > second_cards[j-1] else INT_MIN 
+        from_left = dp[i][j-1] if first_cards[i] > second_cards[j-1] else INT_MIN 
 
-        dp[i][j] = max(from_diag, from_up, from_left)
+        # if i==N and j==N : print(from_diag, from_left, from_up)
+
+        dp[i][j] = max(from_diag+cur, from_up+cur, from_left+cur)
 
 
 ans = INT_MIN
