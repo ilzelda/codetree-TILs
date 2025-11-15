@@ -10,7 +10,10 @@ for j in range(N):
 
 dp[1][0] = numbers[0]
 for j in range(1,N):
-    dp[1][j] = max(dp[1][j-1], dp[1][j-1] + numbers[j] )
+    for jj in range(j+1):
+        #                       선택하지 않음 
+        # print(j," : ",dp[1][j], dp[1][j-1], sum(numbers[jj:j+1]))
+        dp[1][j] = max(dp[1][j], dp[1][j-1], sum(numbers[jj:j+1]))
 
 for i in range(2, M+1):
     for j in range(2*(i-1), N):
