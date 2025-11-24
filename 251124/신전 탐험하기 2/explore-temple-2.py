@@ -28,7 +28,7 @@ for i in range(3):
 dp[0][N][1] = max( Treasure[N][1] + dp[0][N-1][0], 
                     Treasure[N][1] + dp[0][N-1][2])
 dp[0][N][2] = max( Treasure[N][2] + dp[0][N-1][0], 
-                    Treasure[N][2] + dp[0][N-1][2])
+                    Treasure[N][2] + dp[0][N-1][1])
 
 dp[1][N][0] = max( Treasure[N][0] + dp[1][N-1][1], 
                     Treasure[N][0] + dp[1][N-1][2])
@@ -36,7 +36,7 @@ dp[1][N][2] = max( Treasure[N][2] + dp[1][N-1][1],
                     Treasure[N][2] + dp[1][N-1][0])
 
 dp[2][N][0] = max( Treasure[N][0] + dp[2][N-1][1], 
-                   Treasure[N][0] + dp[2][N-1][0])
+                   Treasure[N][0] + dp[2][N-1][2])
 dp[2][N][1] = max( Treasure[N][1] + dp[2][N-1][2], 
                     Treasure[N][1] + dp[2][N-1][0])
 
