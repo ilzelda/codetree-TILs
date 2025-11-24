@@ -15,7 +15,7 @@ for i in range(3):
             dp[i][1][k] = Treasure[1][k]
         
 for i in range(3):
-    for j in range(2,N+1):
+    for j in range(2,N):
         dp[i][j][0] = max( Treasure[j][0] + dp[i][j-1][1], 
                             Treasure[j][0] + dp[i][j-1][2])
         
@@ -24,6 +24,23 @@ for i in range(3):
 
         dp[i][j][2] = max( Treasure[j][2] + dp[i][j-1][1], 
                             Treasure[j][2] + dp[i][j-1][0])
+
+dp[0][N][1] = max( Treasure[N][1] + dp[0][N-1][0], 
+                    Treasure[N][1] + dp[0][N-1][2])
+dp[0][N][2] = max( Treasure[N][2] + dp[0][N-1][0], 
+                    Treasure[N][2] + dp[0][N-1][2])
+
+dp[1][N][0] = max( Treasure[N][0] + dp[1][N-1][1], 
+                    Treasure[N][0] + dp[1][N-1][2])
+dp[1][N][2] = max( Treasure[N][2] + dp[1][N-1][1], 
+                    Treasure[N][2] + dp[1][N-1][0])
+
+dp[2][N][0] = max( Treasure[N][0] + dp[2][N-1][1], 
+                   Treasure[N][0] + dp[2][N-1][0])
+dp[2][N][1] = max( Treasure[N][1] + dp[2][N-1][2], 
+                    Treasure[N][1] + dp[2][N-1][0])
+
+            
 
 print(
     max(
